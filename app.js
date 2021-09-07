@@ -1,5 +1,9 @@
 const express = require("express")
 const mongoose = require("mongoose")
+const LocalStrategy = require('passport-local')
+const UserSchema = require('./models/user')
+const bodyParser = require('body-parser')
+const passport = require("passport")
 
 const app = express()
 
@@ -17,9 +21,17 @@ db.once('open', () => {
     console.log('database connected')
 })
 
+app.use(express.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
 app.use('/', (req, res)=>{
     res.send('Hello World !')
 })
+
+app.use(passport.initialize())
+passport.use(new LocalStrategy(UserSchema.authenticate()))
+passport.serializeUser(UserSchema.serializeUser())
+passport.deserializeUser(UserSchema.deserializeUser())
 
 app.listen('3000', () => {
     console.log('SERVER IS LISTENING ON PORT 3000')
