@@ -21,7 +21,8 @@ module.exports.userLogin = async (req, res, next) => {
 };
 
 module.exports.userLogout = async (req, res, next) => {
-  res.send("Logout succeded !");
+    req.logout()
+    res.send('goodbyeee <3')
 };
 
 module.exports.test = async (req, res, next) => {
