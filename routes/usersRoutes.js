@@ -3,7 +3,7 @@ const passport = require("passport");
 const catchAsync = require("../utils/catchAsync");
 const usersRoute = require("../controllers/usersControllers");
 router = express.Router();
-
+  
 router.post("/register", catchAsync(usersRoute.userRegistration));
 router.post(
   "/login",
