@@ -8,9 +8,6 @@ module.exports.isLoggedIn = (req, res, next) => {
 }
 
 module.exports.isAuthor = async(req, res, next) => {
-    if(!req.isAuthenticated()){
-        return res.send('you must be logged in')
-    }
   const { id } = req.params
   const product = await Product.findById(id)
 
