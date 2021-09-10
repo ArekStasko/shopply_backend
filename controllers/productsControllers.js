@@ -15,7 +15,6 @@ exports.getSingleProduct = async(req, res) => {
 }
 
 exports.deleteProduct = async(req, res) => {
-  console.log('time for delete product')
     try{
         const { id } = req.params
         await Product.findByIdAndDelete(id)
@@ -24,11 +23,6 @@ exports.deleteProduct = async(req, res) => {
     catch(e){
         res.send('Whoops we have an error', e)
     }
-    /*
-   const { id } = req.params
-   const product = await Product.findById(id)
-   res.send(product)
-   */
 }
 
 exports.addProduct = async(req, res) => {

@@ -3,8 +3,10 @@ const passport = require("passport");
 
 module.exports.userRegistration = async (req, res, next) => {
   try {
+    //console.log(req.body)
     const { email, username, place, phonenumber, password } = req.body;
     const user = new User({ email, username, place, phonenumber });
+    console.log(user, password)
     const registeredUser = await User.register(user, password);
     req.login(registeredUser, (err) => {
       if (err) return next(err);

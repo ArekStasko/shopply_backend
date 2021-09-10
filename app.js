@@ -41,7 +41,8 @@ app.use(session(sessionConfig));
 
 //Passport configuration
 app.use(passport.initialize());
-app.use(passport.session());
+app.use(passport.session()); 
+
 passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -54,6 +55,12 @@ app.use((req, res, next) => {
 //Routes
 app.use("/user", require("./routes/usersRoutes"));
 app.use("/products", require("./routes/productsRoutes"));
+
+app.use((err, req, res, next) => {
+  const { statusCode = 500 } = err;
+  if (!err.message) err.message = 'Oh No, Something Went Wrong!'
+  res.status(statusCode).render('error', { err })
+})
 
 app.listen("3000", () => {
   console.log("SERVER IS LISTENING ON PORT 3000");
