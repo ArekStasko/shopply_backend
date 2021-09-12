@@ -1,5 +1,11 @@
 const Product = require('../models/product')
 
+exports.imageTest = async(req, res) => {
+    console.log(req.files)
+    res.send('Success')
+}
+
+
 exports.getProducts = async(req, res) => {
     const products = await Product.find({})
     res.send(products)

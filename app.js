@@ -1,3 +1,7 @@
+if(process.env.NODE_ENV !== 'production') {
+   require('dotenv').config()
+}
+
 const express = require("express");
 const mongoose = require("mongoose");
 const session = require("express-session");
@@ -15,7 +19,7 @@ mongoose.connect("mongodb://localhost:27017/products", {
 });
 
 app.use(cors());
-
+mongoose.set('useCreateIndex', true)
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "conection error:"));
 db.once("open", () => {
