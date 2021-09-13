@@ -12,8 +12,9 @@ const cors = require("cors");
 const { deserializeUser } = require("passport");
 
 const app = express();
+const dbUrl = process.env.DB_URL
 
-mongoose.connect("mongodb://localhost:27017/products", {
+mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
