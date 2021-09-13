@@ -10,9 +10,6 @@ router = express.Router()
 router.get('/getProducts', catchAsync(productsRoute.getProducts))
 router.get('/getSingleProduct/:id', catchAsync(productsRoute.getSingleProduct))
 router.delete('/deleteProduct/:id', isLoggedIn, isAuthor, catchAsync(productsRoute.deleteProduct))
-router.post('/addProduct', isLoggedIn, catchAsync(productsRoute.addProduct))
-router.post('/imageTest', upload.array('images'), catchAsync(productsRoute.imageTest))
-
-
+router.post('/addProduct', isLoggedIn, upload.array('images'), catchAsync(productsRoute.addProduct))
 
 module.exports = router

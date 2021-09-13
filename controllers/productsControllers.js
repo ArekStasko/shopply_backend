@@ -1,4 +1,6 @@
 const Product = require('../models/product')
+const User = require("../models/user");
+const cloudinary = require('cloudinary').v2;
 
 exports.imageTest = async(req, res) => {
     console.log(req.files)
@@ -23,6 +25,10 @@ exports.getSingleProduct = async(req, res) => {
 exports.deleteProduct = async(req, res) => {
     try{
         const { id } = req.params
+        const product = await Product.findById(id)
+        for(let filename of product.imagesNames){
+            await cloudinary.uploader.destroy(filename)
+        }
         await Product.findByIdAndDelete(id)
         res.send('Succesfull deleted product')
     }
@@ -33,8 +39,12 @@ exports.deleteProduct = async(req, res) => {
 
 exports.addProduct = async(req, res) => {
     try{
+        const user = await User.findById(req.user._id)
         const product = new Product(req.body)
+        product.images = req.files.map(item=>item.path)
+        product.imagesNames = req.files.map(item=>item.filename)
         product.userID = req.user._id
+        product.userImage = user.image
         await product.save()
         res.send('Successfull added product !')
     }
