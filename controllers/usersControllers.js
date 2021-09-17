@@ -4,13 +4,6 @@ const passport = require("passport");
 module.exports.userRegistration = async (req, res, next) => {
   try {
     const { email, username, place, phonenumber, password } = req.body;
-    console.log(req.body.data, {
-      email, 
-      username, 
-      place, 
-      phonenumber, 
-      password
-    })
     const user = new User({ email, username, place, phonenumber });
     user.image = req.file.path
     const registeredUser = await User.register(user, password);
