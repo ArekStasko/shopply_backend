@@ -4,7 +4,7 @@ const passport = require("passport");
 module.exports.userRegistration = async (req, res, next) => {
   try {
     const { email, username, place, phonenumber, password } = req.body;
-    console.log(req.body, {
+    console.log(req.body.data, {
       email, 
       username, 
       place, 
