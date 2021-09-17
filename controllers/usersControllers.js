@@ -9,7 +9,7 @@ module.exports.userRegistration = async (req, res, next) => {
     const registeredUser = await User.register(user, password);
     req.login(registeredUser, (err) => {
       if (err) return next(err);
-      res.send(String(req.user));
+      res.send(req.user);
     });
   } catch (e) {
     res.send("Whoops we have an error: ", e);
