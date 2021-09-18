@@ -39,12 +39,16 @@ exports.deleteProduct = async(req, res) => {
 
 exports.addProduct = async(req, res) => {
     try{
-        const user = await User.findById(req.user._id)
+        const { id } = req.params
+        //console.log(req.body)
+        //console.log(id)
+        const user = await User.findById(id)
         const product = new Product(req.body)
         product.images = req.files.map(item=>item.path)
         product.imagesNames = req.files.map(item=>item.filename)
-        product.userID = req.user._id
+        product.userID = id
         product.userImage = user.image
+        console.log(product)
         await product.save()
         res.send('Successfull added product !')
     }
