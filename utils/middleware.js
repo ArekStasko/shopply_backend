@@ -1,7 +1,7 @@
 const Product = require('../models/product')
 const User = require("../models/user");
 
-module.exports.isLoggedIn = (req, res, next) => {
+module.exports.isLoggedIn = async(req, res, next) => {
     const { id } = req.params
     const user = await User.findById(id)
     if(!user){
