@@ -8,11 +8,10 @@ module.exports.isLoggedIn = (req, res, next) => {
 }
 
 module.exports.isAuthor = async(req, res, next) => {
-  const { id } = req.params
+  const { id, userID } = req.params
   const product = await Product.findById(id)
-
   const productUserBuff = Buffer.from(product.userID)
-  const userBuff = Buffer.from(req.user._id.toString())
+  const userBuff = Buffer.from(userID.toString())
 
   if(!productUserBuff.equals(userBuff)){
       res.send('You cant do this !')
