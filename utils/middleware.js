@@ -1,7 +1,10 @@
 const Product = require('../models/product')
+const User = require("../models/user");
 
 module.exports.isLoggedIn = (req, res, next) => {
-    if(!req.isAuthenticated()){
+    const { id } = req.params
+    const user = await User.findById(id)
+    if(!user){
         return res.send('you must be logged in')
     }
     next()
