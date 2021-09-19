@@ -5,7 +5,9 @@ module.exports.userRegistration = async (req, res, next) => {
   try {
     const { email, username, place, phonenumber, password } = req.body;
     const user = new User({ email, username, place, phonenumber });
+    if(req.file.path){
     user.image = req.file.path
+    } 
     const registeredUser = await User.register(user, password);
     req.login(registeredUser, (err) => {
       if (err) return next(err);
