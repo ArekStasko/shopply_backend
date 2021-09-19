@@ -19,6 +19,7 @@ const UserSchema = new Schema({
     },
     image:{
         type: String,
+        default: 'https://res.cloudinary.com/dulsntqev/image/upload/v1632066539/default_user.png',
         required: false,
     },
     phonenumber:{
